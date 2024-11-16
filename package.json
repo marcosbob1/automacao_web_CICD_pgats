@@ -10,7 +10,7 @@
     "lint:format": "prettier --check --ignore-path .gitignore .",
     "format": "prettier --write --ignore-path .gitignore .",
     "cypress:run": "cypress run",
-    "test:e2e": "playwright test"
+    "e2e": "playwright test"
   },
   "keywords": [],
   "author": "Marcos Antonio Pereira Neto",
