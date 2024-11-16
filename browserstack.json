@@ -1,0 +1,41 @@
+// browserstack.json
+
+{
+  "auth": {
+    "username": "sandrascorsineto_UOhbNY",
+    "access_key": "a2eKT6xsi7jmyzq4jPuj"
+  },
+  "browsers": [
+    {
+      "browser": "chrome",
+      "os": "Windows 10",
+      "versions": ["latest", "latest - 1"]
+    },
+    {
+      "browser": "firefox",
+      "os": "OS X Mojave",
+      "versions": ["latest", "latest - 1"]
+    },
+    {
+      "browser": "edge",
+      "os": "OS X Catalina",
+      "versions": ["latest"]
+    }
+  ],
+  "run_settings": {
+    "cypress_config_file": "./cypress.config.js",
+    // For Cypress v9 or lower using the following configuration
+    // "cypress_config_file": "./cypress.json",
+    "cypress_version": "13.latest",
+    "npm_dependencies": {
+      "@faker-js/faker": "^8.4.1",
+      "cypress-mochawesome-reporter": "^3.8.2"
+    },
+    "package_config_options": {},
+    "headless": true,
+    "project_name": "automacao-web-pgats",
+    "build_name": "build-name",
+    "parallels": 2,
+    "exclude": []
+  }
+}

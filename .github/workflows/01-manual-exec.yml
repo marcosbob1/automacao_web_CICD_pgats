@@ -1,0 +1,60 @@
+# CI de Nível 01 - Disparo Manual a partir de 1 clique
+
+# Nome que aparecerá nas opções de pipeline
+name: "Execução Manual"
+
+# Gatilho de execução manual
+on:
+  workflow_dispatch:
+
+jobs:
+  # Descrição do job
+  e2e-tests:
+    # Máquina que o job irá executar
+    runs-on:
+      - ubuntu-latest
+
+    # Passo a passo das ações do job
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3  # Usando a versão mais estável do checkout
+
+         # Instalar Node.js e Yarn
+      - name: Configurando Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18 
+
+      - name: Instalando Yarn
+        run: npm install -g yarn  # Certificando que o Yarn esteja instalado
+
+      - name: Instalando dependências
+        run: yarn install  # Instalar as dependências do projeto
+
+         # Configurar Cypress
+      - name: Instalando Cypress
+        run: yarn add cypress --dev            
+
+     # Instalar o navegador necessário para o Cypress
+      - name: Instalando navegadores necessários
+        run: yarn cypress install
+
+      # Executar os testes Cypress
+      - name: Executando testes E2E
+        run: yarn cypress run
+        
+      - name: Instalando Playwright
+        run: yarn playwright install  # Instalar Playwright (necessário para testes E2E)
+
+      - name: Verificando a instalação
+        run: yarn --version  # Verificar se o Yarn está instalado corretamente
+
+      - name: Testes E2E (end-to-end)
+        run: yarn run e2e  # Executar os testes E2E configurados
+
+    # Salvar capturas de tela e vídeos de falhas
+      - name: Salvando artefatos
+        uses: actions/upload-artifact@v3
+        with:
+            name: cypress-results
+            path: cypress/videos
